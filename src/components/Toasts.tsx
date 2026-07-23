@@ -11,7 +11,7 @@ export function UploadToast() {
     uploading.fileName + (uploading.extraCount > 0 ? ` +${uploading.extraCount} more` : "");
 
   return (
-    <div className="absolute right-6 bottom-5 z-50 flex animate-pop-in items-center gap-3 rounded-xl border border-line bg-white px-4.5 py-3.5 shadow-[0_20px_44px_-20px_rgba(15,23,42,.4)]">
+    <div className="absolute right-4 bottom-5 left-4 z-50 flex animate-pop-in items-center gap-3 rounded-xl border border-line bg-white px-4.5 py-3.5 shadow-[0_20px_44px_-20px_rgba(15,23,42,.4)] sm:right-6 sm:left-auto">
       <div className="h-[22px] w-[22px] animate-spin rounded-full border-[2.5px] border-[#e2e7f0] border-t-accent" />
       <div>
         <div className="text-[13.5px] font-semibold">Uploading {label}</div>
@@ -33,7 +33,7 @@ export function UploadErrorToast() {
   if (!uploadError) return null;
 
   return (
-    <div className="absolute right-6 bottom-24 z-50 flex max-w-md animate-pop-in items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4.5 py-3.5 shadow-[0_20px_44px_-20px_rgba(15,23,42,.3)]">
+    <div className="absolute right-4 bottom-24 left-4 z-50 flex max-w-md animate-pop-in items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4.5 py-3.5 shadow-[0_20px_44px_-20px_rgba(15,23,42,.3)] sm:right-6 sm:left-auto">
       <div className="min-w-0 text-[13px] leading-normal font-medium break-words text-red-700">
         {uploadError}
       </div>

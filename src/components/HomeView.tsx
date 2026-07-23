@@ -20,8 +20,8 @@ export function HomeView({ onNewRoom }: HomeViewProps) {
   const { rooms, nodes, openRoom } = useDataRoom();
 
   return (
-    <div className="dr-scroll flex-1 overflow-y-auto px-10 py-8">
-      <div className="mb-6 flex items-end justify-between">
+    <div className="dr-scroll flex-1 overflow-y-auto px-4 py-6 sm:px-6 md:px-10 md:py-8">
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="font-serif text-[27px] font-semibold tracking-tight">Data Rooms</h1>
           <p className="mt-1 text-sm text-slate-500">
@@ -37,7 +37,7 @@ export function HomeView({ onNewRoom }: HomeViewProps) {
         </button>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4.5">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(min(280px,100%),1fr))] gap-4.5">
         {rooms.map((room, i) => {
           const roomNodes = Object.values(nodes).filter((n) => n.roomId === room.id);
           const lastUpdated = roomNodes.reduce(

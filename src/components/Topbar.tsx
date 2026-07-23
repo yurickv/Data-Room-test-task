@@ -2,13 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useDataRoom } from "@/store/data-room-context";
-import { SearchIcon, UploadIcon } from "./icons";
+import { MenuIcon, SearchIcon, UploadIcon } from "./icons";
 
 interface TopbarProps {
   onUploadClick: () => void;
+  /** Opens the sidebar drawer; the trigger is only visible on small screens. */
+  onMenuClick: () => void;
 }
 
-export function Topbar({ onUploadClick }: TopbarProps) {
+export function Topbar({ onUploadClick, onMenuClick }: TopbarProps) {
   const { user, view, search, setSearch, signOut } = useDataRoom();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -31,7 +33,14 @@ export function Topbar({ onUploadClick }: TopbarProps) {
     .toUpperCase();
 
   return (
-    <header className="flex h-16 shrink-0 items-center gap-4 border-b border-line bg-white px-6">
+    <header className="flex h-16 shrink-0 items-center gap-2 border-b border-line bg-white px-3 sm:gap-4 sm:px-6">
+      <button
+        onClick={onMenuClick}
+        aria-label="Open menu"
+        className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-[10px] text-slate-600 transition-colors hover:bg-[#f1f4f9] md:hidden"
+      >
+        <MenuIcon size={20} />
+      </button>
       {view === "browser" && (
         <div className="relative max-w-[460px] flex-1">
           <SearchIcon
@@ -60,10 +69,11 @@ export function Topbar({ onUploadClick }: TopbarProps) {
       {view === "browser" && (
         <button
           onClick={onUploadClick}
-          className="flex h-10 cursor-pointer items-center gap-2 rounded-[10px] border border-[#e2e7f0] bg-white px-4 text-[13.5px] font-semibold text-slate-700 transition-all hover:border-[#c3ccdc] hover:bg-[#f7f9fc]"
+          aria-label="Upload"
+          className="flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-[10px] border border-[#e2e7f0] bg-white px-3 text-[13.5px] font-semibold text-slate-700 transition-all hover:border-[#c3ccdc] hover:bg-[#f7f9fc] sm:px-4"
         >
           <UploadIcon size={16} />
-          Upload
+          <span className="hidden sm:inline">Upload</span>
         </button>
       )}
 

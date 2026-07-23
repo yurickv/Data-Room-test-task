@@ -8,8 +8,19 @@ import { FolderIcon, FolderLockIcon, HomeIcon, ShieldIcon } from "./icons";
 
 const STORAGE_CAP_BYTES = 5 * 1024 ** 3;
 
-export function Sidebar() {
+interface SidebarProps {
+  /** Mobile drawer state; on md+ the sidebar is always visible and these are inert. */
+  mobileOpen: boolean;
+  onMobileClose: () => void;
+}
+
+export function Sidebar({ mobileOpen, onMobileClose }: SidebarProps) {
   const { nodes, view, currentRoomId, currentFolderId, goHome, openFolder } = useDataRoom();
+
+  const navigate = (action: () => void) => {
+    action();
+    onMobileClose();
+  };
 
   const tree = useMemo(
     () => (currentRoomId ? flattenFolderTree(nodes, currentRoomId) : []),
@@ -24,7 +35,18 @@ export function Sidebar() {
   const usedPct = Math.max(1, Math.round((usedBytes / STORAGE_CAP_BYTES) * 100));
 
   return (
-    <aside className="flex flex-col overflow-hidden bg-navy text-slate-300">
+    <>
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-[1px] md:hidden"
+          onClick={onMobileClose}
+        />
+      )}
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 flex w-[270px] flex-col overflow-hidden bg-navy text-slate-300 transition-transform duration-200 md:static md:z-auto md:w-auto md:translate-x-0 md:transition-none ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
       <div className="flex items-center gap-3 border-b border-white/10 px-4 pt-4 pb-3.5">
         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent">
           <FolderLockIcon size={17} className="text-white" />
@@ -39,7 +61,7 @@ export function Sidebar() {
 
       <div className="px-3 pt-3.5 pb-1.5">
         <button
-          onClick={goHome}
+          onClick={() => navigate(goHome)}
           className={`flex w-full cursor-pointer items-center gap-2.5 rounded-[9px] px-3 py-2 text-left text-[13.5px] font-medium transition-colors hover:bg-white/5 ${
             view === "home" ? "bg-white/10 text-white" : "text-slate-300"
           }`}
@@ -63,7 +85,7 @@ export function Sidebar() {
               return (
                 <button
                   key={folder.id}
-                  onClick={() => openFolder(folder.id)}
+                  onClick={() => navigate(() => openFolder(folder.id))}
                   className={`flex w-full cursor-pointer items-center gap-2 rounded-lg px-2.5 py-[7px] text-left text-[13px] font-medium transition-colors ${
                     active ? "bg-accent/30 text-white" : "text-slate-300 hover:bg-white/5"
                   }`}
@@ -95,6 +117,7 @@ export function Sidebar() {
           Encrypted · Audit log active
         </div>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }

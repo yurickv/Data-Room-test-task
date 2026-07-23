@@ -49,9 +49,9 @@ export function AuthScreen() {
       </div>
 
       {/* Sign-in card */}
-      <div className="flex items-center justify-center bg-canvas p-10">
+      <div className="flex items-center justify-center bg-canvas p-5 sm:p-10">
         <div className="w-full max-w-[392px] animate-fade-in">
-          <div className="rounded-2xl border border-line bg-white px-9 py-10 shadow-[0_24px_60px_-30px_rgba(15,23,42,.35)]">
+          <div className="rounded-2xl border border-line bg-white px-6 py-8 shadow-[0_24px_60px_-30px_rgba(15,23,42,.35)] sm:px-9 sm:py-10">
             <h2 className="text-[23px] font-semibold tracking-tight">
               Sign in to your Data Room
             </h2>

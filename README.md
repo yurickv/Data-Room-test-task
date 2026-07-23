@@ -18,6 +18,9 @@ Google-Drive-style browsing experience. Built as a single-page application with
 - **Search** — filters the whole current room by name (files and folders), with each result
   showing its folder path.
 - **Persistence** — everything survives a page reload with no backend.
+- **Responsive** — on small screens the sidebar becomes a slide-in drawer (hamburger in the
+  top bar, auto-closes on navigation), table columns collapse into a meta line under each
+  name, and action buttons shrink to icons.
 
 ### Edge cases handled
 

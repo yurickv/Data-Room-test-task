@@ -41,15 +41,16 @@ export function DataRoomApp() {
 
   const [modal, setModal] = useState<ModalState>(null);
   const [openedFile, setOpenedFile] = useState<FileNode | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!ready) {
-    return <div className="h-screen w-full bg-canvas" />;
+    return <div className="h-dvh w-full bg-canvas" />;
   }
 
   if (view === "auth") {
     return (
-      <div className="h-screen min-h-[640px] w-full overflow-hidden">
+      <div className="h-dvh w-full overflow-hidden">
         <AuthScreen />
       </div>
     );
@@ -71,11 +72,14 @@ export function DataRoomApp() {
   })();
 
   return (
-    <div className="grid h-screen min-h-[640px] w-full grid-cols-[270px_1fr] bg-canvas">
-      <Sidebar />
+    <div className="grid h-dvh w-full grid-cols-1 bg-canvas md:grid-cols-[270px_1fr]">
+      <Sidebar mobileOpen={sidebarOpen} onMobileClose={() => setSidebarOpen(false)} />
 
       <main className="relative flex flex-col overflow-hidden">
-        <Topbar onUploadClick={() => fileInputRef.current?.click()} />
+        <Topbar
+          onUploadClick={() => fileInputRef.current?.click()}
+          onMenuClick={() => setSidebarOpen(true)}
+        />
 
         {view === "home" && <HomeView onNewRoom={() => setModal({ kind: "newRoom" })} />}
         {view === "browser" && (

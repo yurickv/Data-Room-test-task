@@ -52,10 +52,14 @@ export function ItemRow({
     return () => document.removeEventListener("mousedown", close);
   }, [menuOpen, onCloseMenu]);
 
+  const typeLabel = isFolder ? "Folder" : "PDF";
+  const sizeLabel = isFolder ? pluralize(childCount, "item") : formatSize(node.size);
+  const dateLabel = formatDate(node.updatedAt);
+
   return (
     <div
       onClick={onOpen}
-      className="grid cursor-pointer grid-cols-[minmax(0,1fr)_84px_96px_118px_40px] items-center gap-2.5 rounded-[9px] border-b border-[#f1f4f9] px-3.5 py-3 transition-colors hover:bg-white"
+      className="grid cursor-pointer grid-cols-[minmax(0,1fr)_40px] items-center gap-2.5 rounded-[9px] border-b border-[#f1f4f9] px-3.5 py-3 transition-colors hover:bg-white md:grid-cols-[minmax(0,1fr)_84px_96px_118px_40px]"
     >
       <div className="flex min-w-0 items-center gap-3">
         <div
@@ -70,13 +74,14 @@ export function ItemRow({
           {pathLabel && (
             <div className="mt-0.5 truncate text-[11.5px] text-slate-400">{pathLabel}</div>
           )}
+          <div className="mt-0.5 truncate text-[11.5px] text-slate-400 md:hidden">
+            {typeLabel} · {sizeLabel} · {dateLabel}
+          </div>
         </div>
       </div>
-      <span className="text-[13px] text-slate-500">{isFolder ? "Folder" : "PDF"}</span>
-      <span className="text-[13px] text-slate-500">
-        {isFolder ? pluralize(childCount, "item") : formatSize(node.size)}
-      </span>
-      <span className="text-[13px] text-slate-500">{formatDate(node.updatedAt)}</span>
+      <span className="hidden text-[13px] text-slate-500 md:block">{typeLabel}</span>
+      <span className="hidden text-[13px] text-slate-500 md:block">{sizeLabel}</span>
+      <span className="hidden text-[13px] text-slate-500 md:block">{dateLabel}</span>
 
       <div ref={menuRef} className="relative flex justify-end">
         <button

@@ -70,7 +70,7 @@ export function BrowserView({
   return (
     <>
       {/* Header: breadcrumbs + actions */}
-      <div className="shrink-0 border-b border-line-soft bg-white px-6 pt-5 pb-3.5">
+      <div className="shrink-0 border-b border-line-soft bg-white px-4 pt-4 pb-3.5 sm:px-6 sm:pt-5">
         <nav className="mb-3.5 flex flex-wrap items-center gap-1.5 text-[13.5px]">
           {crumbs.map((crumb, i) => {
             const last = i === crumbs.length - 1;
@@ -96,24 +96,26 @@ export function BrowserView({
           <div className="flex-1" />
           <button
             onClick={onNewFolder}
-            className="flex h-[38px] cursor-pointer items-center gap-1.5 rounded-[9px] border border-[#e2e7f0] bg-white px-3.5 text-[13px] font-semibold whitespace-nowrap text-slate-700 transition-all hover:border-[#c3ccdc] hover:bg-[#f7f9fc]"
+            aria-label="New Folder"
+            className="flex h-[38px] shrink-0 cursor-pointer items-center gap-1.5 rounded-[9px] border border-[#e2e7f0] bg-white px-3 text-[13px] font-semibold whitespace-nowrap text-slate-700 transition-all hover:border-[#c3ccdc] hover:bg-[#f7f9fc] sm:px-3.5"
           >
             <FolderPlusIcon size={15} className="shrink-0" />
-            New Folder
+            <span className="hidden sm:inline">New Folder</span>
           </button>
           <button
             onClick={onUploadClick}
-            className="flex h-[38px] cursor-pointer items-center gap-1.5 rounded-[9px] bg-accent px-4 text-[13px] font-semibold whitespace-nowrap text-white shadow-[0_8px_18px_-9px_rgba(40,86,214,.6)] transition-colors hover:bg-accent-dark"
+            aria-label="Upload PDF"
+            className="flex h-[38px] shrink-0 cursor-pointer items-center gap-1.5 rounded-[9px] bg-accent px-3 text-[13px] font-semibold whitespace-nowrap text-white shadow-[0_8px_18px_-9px_rgba(40,86,214,.6)] transition-colors hover:bg-accent-dark sm:px-4"
           >
             <UploadIcon size={15} className="shrink-0" />
-            Upload PDF
+            <span className="hidden sm:inline">Upload PDF</span>
           </button>
         </div>
       </div>
 
       {/* Content */}
       <div
-        className={`dr-scroll relative flex-1 overflow-y-auto px-6 pb-10 ${
+        className={`dr-scroll relative flex-1 overflow-y-auto px-4 pb-10 sm:px-6 ${
           dragOver ? "ring-2 ring-accent ring-inset" : ""
         }`}
         onDragOver={(e) => {
@@ -135,7 +137,7 @@ export function BrowserView({
 
         {items.length > 0 && (
           <>
-            <div className="sticky top-0 z-5 grid grid-cols-[minmax(0,1fr)_84px_96px_118px_40px] gap-2.5 border-b border-line-soft bg-canvas px-3.5 py-3 text-[11.5px] font-semibold tracking-wide text-slate-400 uppercase">
+            <div className="sticky top-0 z-5 hidden grid-cols-[minmax(0,1fr)_84px_96px_118px_40px] gap-2.5 border-b border-line-soft bg-canvas px-3.5 py-3 text-[11.5px] font-semibold tracking-wide text-slate-400 uppercase md:grid">
               <span>Name</span>
               <span>Type</span>
               <span>Size</span>

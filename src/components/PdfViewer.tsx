@@ -51,7 +51,7 @@ export function PdfViewer({ file, onClose }: PdfViewerProps) {
 
   return (
     <div className="fixed inset-0 z-120 flex animate-[fade-in_.2s_ease_both] flex-col bg-[#090e1a]/70 backdrop-blur-[3px]">
-      <div className="flex h-[60px] shrink-0 items-center gap-3.5 px-5.5 text-slate-200">
+      <div className="flex h-[60px] shrink-0 items-center gap-2.5 px-3 text-slate-200 sm:gap-3.5 sm:px-5.5">
         <PdfFileIcon size={20} className="text-red-400" />
         <div className="truncate text-[14.5px] font-semibold">{file.name}</div>
         <div className="text-[12.5px] whitespace-nowrap text-slate-400">{meta}</div>
@@ -64,7 +64,7 @@ export function PdfViewer({ file, onClose }: PdfViewerProps) {
           ✕
         </button>
       </div>
-      <div className="flex-1 overflow-hidden px-5.5 pb-5.5">
+      <div className="flex-1 overflow-hidden px-3 pb-3 sm:px-5.5 sm:pb-5.5">
         <div className="h-full w-full overflow-hidden rounded-xl bg-white">
           {src ? (
             <iframe src={src} title={file.name} className="h-full w-full border-none" />
