@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0d1526;
+  --color-navy-mid: #152340;
+  --color-navy-light: #1b2f57;
+  --color-accent: #2856d6;
+  --color-accent-dark: #1d47c0;
+  --color-accent-soft: #eef2fe;
+  --color-accent-ring: #e5ecff;
+  --color-canvas: #f4f6fb;
+  --color-line: #e6eaf2;
+  --color-line-soft: #eef1f6;
+  --color-line-input: #dbe0ea;
+
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-plex-serif), ui-serif, Georgia, serif;
+
+  --animate-fade-in: fade-in 0.4s ease both;
+  --animate-pop-in: pop-in 0.18s ease both;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #0f172a;
+  background: var(--color-canvas);
+}
+
+/* Slim scrollbars for panel lists */
+.dr-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.dr-scroll::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.35);
+  border-radius: 99px;
+}
+.dr-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
